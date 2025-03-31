@@ -12,7 +12,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Custom hook to manage location
 const useCurrentLocation = () => {
-  const [position, setPosition] = useState<LatLngExpression>([49.841, 24.0315]); // Default: Lviv
+  const [position, setPosition] = useState<LatLngExpression>([28.604, 77.225]); // Default: Lviv
 
   useEffect(() => {
     if (navigator.geolocation) {
