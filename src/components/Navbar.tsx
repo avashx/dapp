@@ -1,79 +1,34 @@
-
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { QrCode, MapPin, Bus, ChevronUp, Search, Navigation, Menu, BarChart2 } from 'lucide-react';
+import { ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavbarProps {
   expanded: boolean;
   onToggle: () => void;
-  onShowBusStops: (show: boolean) => void;
-  onShowBuses: (show: boolean) => void;
-  onOpenAnalytics: () => void;
 }
 
-const Navbar = ({ expanded, onToggle, onShowBusStops, onShowBuses, onOpenAnalytics }: NavbarProps) => {
-  const [showBusStops, setShowBusStops] = useState(false);
-  const [showBuses, setShowBuses] = useState(false);
-
-  const handleBusStopsToggle = () => {
-    const newValue = !showBusStops;
-    setShowBusStops(newValue);
-    onShowBusStops(newValue);
-  };
-
-  const handleBusesToggle = () => {
-    const newValue = !showBuses;
-    setShowBuses(newValue);
-    onShowBuses(newValue);
-  };
-
+const Navbar = ({ expanded, onToggle }: NavbarProps) => {
   return (
     <motion.div
       className={cn(
         "fixed bottom-0 left-0 right-0 bg-black text-white z-10 rounded-t-3xl shadow-lg",
         expanded ? "pb-6" : ""
       )}
-      initial={{ height: 100 }} // Increased from 80 to 100
-      animate={{ height: expanded ? "50vh" : 100 }} // Increased from 80 to 100
+      initial={{ height: 100 }}
+      animate={{ height: expanded ? "50vh" : 100 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {/* Toggle bar */}
       <div 
-        className="h-20 flex justify-center items-center cursor-pointer" // Increased from h-16 to h-20
+        className="h-20 flex justify-center items-center cursor-pointer"
         onClick={onToggle}
       >
         <motion.div
           animate={{ rotate: expanded ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ChevronUp size={28} /> {/* Increased from 24 to 28 */}
+          <ChevronUp size={28} />
         </motion.div>
-      </div>
-
-      {/* Bottom action buttons in collapsed state */}
-      <div className={cn(
-        "absolute bottom-0 left-0 right-0 flex justify-around pb-6", // Increased from pb-4 to pb-6
-        expanded ? "hidden" : "block"
-      )}>
-        <button 
-          className="rounded-full bg-black p-4 shadow" // Increased from p-3 to p-4
-          onClick={() => onShowBusStops(true)}
-        >
-          <MapPin size={28} /> {/* Increased from 24 to 28 */}
-        </button>
-        <button 
-          className="rounded-full bg-black p-4 shadow" // Increased from p-3 to p-4
-          onClick={onToggle}
-        >
-          <Menu size={28} /> {/* Increased from 24 to 28 */}
-        </button>
-        <button 
-          className="rounded-full bg-black p-4 shadow" // Increased from p-3 to p-4
-          onClick={onOpenAnalytics}
-        >
-          <BarChart2 size={28} /> {/* Increased from 24 to 28 */}
-        </button>
       </div>
 
       {/* Expanded content */}
@@ -91,42 +46,13 @@ const Navbar = ({ expanded, onToggle, onShowBusStops, onShowBuses, onOpenAnalyti
                 placeholder="Search locations..."
                 className="w-full py-3 px-10 bg-gray-800 rounded-full text-white placeholder:text-gray-400 focus:outline-none"
               />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
             </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 my-6">
-            <button 
-              className={cn(
-                "flex flex-col items-center justify-center p-4 rounded-xl transition-colors",
-                showBusStops ? "bg-white text-black" : "bg-gray-800 text-white"
-              )}
-              onClick={handleBusStopsToggle}
-            >
-              <MapPin size={24} className="mb-2" />
-              <span className="text-sm font-medium">Bus Stops</span>
-            </button>
-            
-            <button 
-              className={cn(
-                "flex flex-col items-center justify-center p-4 rounded-xl transition-colors",
-                showBuses ? "bg-white text-black" : "bg-gray-800 text-white"
-              )}
-              onClick={handleBusesToggle}
-            >
-              <Bus size={24} className="mb-2" />
-              <span className="text-sm font-medium">Buses</span>
-            </button>
-            
-            <button className="flex flex-col items-center justify-center p-4 rounded-xl bg-gray-800">
-              <Navigation size={24} className="mb-2" />
-              <span className="text-sm font-medium">Navigate</span>
-            </button>
-            
-            <button className="flex flex-col items-center justify-center p-4 rounded-xl bg-gray-800">
-              <QrCode size={24} className="mb-2" />
-              <span className="text-sm font-medium">Scan QR</span>
-            </button>
           </div>
 
           <div className="rounded-xl bg-gray-800 p-4 mb-6">
@@ -134,7 +60,10 @@ const Navbar = ({ expanded, onToggle, onShowBusStops, onShowBuses, onOpenAnalyti
             {busStops.slice(0, 3).map((stop, index) => (
               <div key={index} className="flex items-center py-2 border-b border-gray-700 last:border-0">
                 <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center mr-3">
-                  <MapPin size={18} />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
                 </div>
                 <div>
                   <p className="font-medium">{stop.name}</p>

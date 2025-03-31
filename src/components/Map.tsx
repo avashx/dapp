@@ -1,14 +1,14 @@
-
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { LatLngExpression, Icon } from 'leaflet';
-import { Bus, MapPin, Navigation, AlertCircle } from 'lucide-react';
+import { LatLngExpression } from 'leaflet';
+import L from 'leaflet';
+import { Bus, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import 'leaflet/dist/leaflet.css';
 
-// Import Leaflet marker icons directly
-import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
-import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png';
+// Import Leaflet marker icons directly as URLs (not using require)
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Custom hook to manage location
 const useCurrentLocation = () => {
@@ -99,9 +99,9 @@ const Map = ({ navbarExpanded, showBusStops, showBuses }: MapProps) => {
   
   // Create Leaflet icon for markers
   const createIcon = () => {
-    return new Icon({
-      iconUrl: markerIconUrl,
-      shadowUrl: markerShadowUrl,
+    return new L.Icon({
+      iconUrl: markerIcon,
+      shadowUrl: markerShadow,
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],

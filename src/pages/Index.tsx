@@ -1,14 +1,15 @@
-
 import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import Navbar from '../components/Navbar';
 import QRButton from '../components/QRButton';
 import Analytics from '../components/Analytics';
+import { BarChart2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Index = () => {
   const [navbarExpanded, setNavbarExpanded] = useState(false);
-  const [showBusStops, setShowBusStops] = useState(false);
-  const [showBuses, setShowBuses] = useState(false);
+  const [showBusStops, setShowBusStops] = useState(true); // Default to true
+  const [showBuses, setShowBuses] = useState(true); // Default to true
   const [showAnalytics, setShowAnalytics] = useState(false);
   
   // Add mobile viewport meta for better mobile display
@@ -40,14 +41,20 @@ const Index = () => {
           showBuses={showBuses} 
         />
 
+        {/* Analytics Button - Above QR Button */}
+        <motion.button
+          className="fixed bottom-44 right-8 z-20 bg-black text-white rounded-full p-3 shadow-lg"
+          whileTap={{ scale: 0.95 }}
+          onClick={openAnalytics}
+        >
+          <BarChart2 size={24} />
+        </motion.button>
+
         <QRButton />
 
         <Navbar 
           expanded={navbarExpanded} 
-          onToggle={toggleNavbar} 
-          onShowBusStops={setShowBusStops}
-          onShowBuses={setShowBuses}
-          onOpenAnalytics={openAnalytics}
+          onToggle={toggleNavbar}
         />
 
         <Analytics 
