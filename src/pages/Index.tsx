@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import Navbar from '../components/Navbar';
@@ -41,13 +42,13 @@ const Index = () => {
           showBuses={showBuses} 
         />
 
-        {/* Analytics Button - Above QR Button */}
+        {/* Analytics Button - Above QR Button with increased distance */}
         <motion.button
-          className="fixed bottom-44 right-8 z-20 bg-black text-white rounded-full p-3 shadow-lg"
+          className="fixed bottom-50 right-8 z-20 bg-black text-white rounded-full p-2.8 shadow-lg"
           whileTap={{ scale: 0.95 }}
           onClick={openAnalytics}
         >
-          <BarChart2 size={24} />
+          <BarChart2 size={22} />
         </motion.button>
 
         <QRButton />

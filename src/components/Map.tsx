@@ -6,13 +6,13 @@ import { Bus, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import 'leaflet/dist/leaflet.css';
 
-// Import Leaflet marker icons directly as URLs (not using require)
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+// Import Leaflet marker icons as URLs instead of using require
+const markerIcon = 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png';
+const markerShadow = 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png';
 
 // Custom hook to manage location
 const useCurrentLocation = () => {
-  const [position, setPosition] = useState<LatLngExpression>([28.604, 77.225]); // Default: Lviv
+  const [position, setPosition] = useState<LatLngExpression>([49.841, 24.0315]); // Default: Lviv
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -58,7 +58,6 @@ const MapController = ({ center, navbarExpanded }: { center: LatLngExpression, n
   return null;
 };
 
-// Mock data for bus stops
 const busStops = [
   { id: 1, position: [28.628, 77.216], name: "India Gate", distance: "150m" },
   { id: 2, position: [28.635, 77.222], name: "Connaught Place", distance: "300m" },
@@ -73,6 +72,7 @@ const buses = [
   { id: 2, position: [28.612, 77.230], number: "102", eta: "7 min" },
   { id: 3, position: [28.609, 77.220], number: "203", eta: "1 min" },
 ];
+
 
 // Get nearest bus stop
 const getNearestBusStop = (position: LatLngExpression) => {
@@ -114,14 +114,13 @@ const Map = ({ navbarExpanded, showBusStops, showBuses }: MapProps) => {
       navbarExpanded ? "h-[50vh]" : "h-screen"
     )}>
       <MapContainer 
-        center={currentPosition}
         zoom={15} 
         zoomControl={false}
         className="w-full h-full"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
         <MapController center={currentPosition} navbarExpanded={navbarExpanded} />
@@ -135,8 +134,7 @@ const Map = ({ navbarExpanded, showBusStops, showBuses }: MapProps) => {
         {showBusStops && busStops.map(stop => (
           <Marker 
             key={stop.id} 
-            position={stop.position as LatLngExpression} 
-            icon={createIcon()}
+            position={stop.position as LatLngExpression}
           >
             <Popup>{stop.name} - {stop.distance} away</Popup>
           </Marker>
@@ -147,7 +145,6 @@ const Map = ({ navbarExpanded, showBusStops, showBuses }: MapProps) => {
           <Marker 
             key={bus.id} 
             position={bus.position as LatLngExpression}
-            icon={createIcon()}
           >
             <Popup>Bus {bus.number} - Arriving in {bus.eta}</Popup>
           </Marker>
