@@ -60,18 +60,18 @@ const MapController = ({ center, navbarExpanded }: { center: LatLngExpression, n
 
 // Mock data for bus stops
 const busStops = [
-  { id: 1, position: [49.843, 24.032], name: "Opera House", distance: "150m" },
-  { id: 2, position: [49.839, 24.029], name: "Rynok Square", distance: "300m" },
-  { id: 3, position: [49.845, 24.025], name: "Lviv Polytechnic", distance: "450m" },
-  { id: 4, position: [49.837, 24.035], name: "High Castle", distance: "520m" },
-  { id: 5, position: [49.841, 24.037], name: "Lviv Arsenal", distance: "650m" },
+  { id: 1, position: [28.628, 77.216], name: "India Gate", distance: "150m" },
+  { id: 2, position: [28.635, 77.222], name: "Connaught Place", distance: "300m" },
+  { id: 3, position: [28.604, 77.225], name: "Qutub Minar", distance: "450m" },
+  { id: 4, position: [28.608, 77.232], name: "Red Fort", distance: "520m" },
+  { id: 5, position: [28.596, 77.290], name: "Lotus Temple", distance: "650m" },
 ];
 
 // Mock data for buses
 const buses = [
-  { id: 1, position: [49.844, 24.031], number: "9A", eta: "3 min" },
-  { id: 2, position: [49.838, 24.030], number: "5", eta: "7 min" },
-  { id: 3, position: [49.842, 24.028], number: "1", eta: "1 min" },
+  { id: 1, position: [28.630, 77.218], number: "501", eta: "3 min" },
+  { id: 2, position: [28.612, 77.230], number: "102", eta: "7 min" },
+  { id: 3, position: [28.609, 77.220], number: "203", eta: "1 min" },
 ];
 
 // Get nearest bus stop
